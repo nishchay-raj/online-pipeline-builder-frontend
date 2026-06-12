@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { NodeField } from './NodeField';
 
 export const OutputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'output_'));
@@ -25,26 +26,21 @@ export const OutputNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode title="Output" handles={handles}>
-      <div>
-        <label>
-          Name:
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={handleNameChange} 
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Type:
-          <select value={outputType} onChange={handleTypeChange}>
-            <option value="Text">Text</option>
-            <option value="File">Image</option>
-          </select>
-        </label>
-      </div>
+    <BaseNode title="Output" badge="SINK" description="Delivers the result of the workflow." handles={handles} variant="output" onDelete={data?.onDelete}>
+      <NodeField label="Name">
+        <input 
+          className="node-control"
+          type="text" 
+          value={currName} 
+          onChange={handleNameChange} 
+        />
+      </NodeField>
+      <NodeField label="Type">
+        <select className="node-control" value={outputType} onChange={handleTypeChange}>
+          <option value="Text">Text</option>
+          <option value="File">Image</option>
+        </select>
+      </NodeField>
     </BaseNode>
   );
 }

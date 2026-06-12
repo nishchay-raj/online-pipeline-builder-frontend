@@ -3,6 +3,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { NodeField } from './NodeField';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
@@ -63,28 +64,23 @@ export const TextNode = ({ id, data }) => {
   return (
     <BaseNode
       title="Text"
+      badge="CONTENT"
+      description="Transforms incoming values into editable text."
       handles={handles}
-      style={{ height: 'auto', minHeight: 80 }}
+      style={{ height: 'auto', minHeight: 120 }}
       contentStyle={{ overflow: 'visible' }}
+      variant="text"
+      onDelete={data?.onDelete}
     >
-      <label style={{ display: 'block' }}>
-        Text:
+      <NodeField label="Text" hint={`${variableNames.length} variable${variableNames.length === 1 ? '' : 's'} detected`}>
         <textarea 
+          className="node-control node-control--textarea"
           ref={textareaRef}
           value={currText} 
           onChange={handleTextChange}
           rows={1}
-          style={{
-            display: 'block',
-            width: '100%',
-            resize: 'none',
-            overflow: 'hidden',
-            boxSizing: 'border-box',
-            font: 'inherit',
-            marginTop: '4px',
-          }}
         />
-      </label>
+      </NodeField>
     </BaseNode>
   );
 }

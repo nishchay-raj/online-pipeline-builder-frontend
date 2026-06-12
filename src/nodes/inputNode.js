@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { NodeField } from './NodeField';
 
 export const InputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
@@ -25,26 +26,21 @@ export const InputNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode title="Input" handles={handles}>
-      <div>
-        <label>
-          Name:
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={handleNameChange} 
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Type:
-          <select value={inputType} onChange={handleTypeChange}>
-            <option value="Text">Text</option>
-            <option value="File">File</option>
-          </select>
-        </label>
-      </div>
+    <BaseNode title="Input" badge="SOURCE" description="Starts a flow with structured data." handles={handles} variant="input" onDelete={data?.onDelete}>
+      <NodeField label="Name">
+        <input 
+          className="node-control"
+          type="text" 
+          value={currName} 
+          onChange={handleNameChange} 
+        />
+      </NodeField>
+      <NodeField label="Type">
+        <select className="node-control" value={inputType} onChange={handleTypeChange}>
+          <option value="Text">Text</option>
+          <option value="File">File</option>
+        </select>
+      </NodeField>
     </BaseNode>
   );
 }

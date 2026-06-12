@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { NodeField } from './NodeField';
 
 export const MathNode = ({ id, data }) => {
   const [operation, setOperation] = useState(data?.operation || 'add');
@@ -29,13 +30,12 @@ export const MathNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode title="Math" handles={handles}>
-      <label style={{ display: 'block' }}>
-        Op:
+    <BaseNode title="Math" badge="CALC" description="Applies arithmetic to incoming values." handles={handles} variant="math" onDelete={data?.onDelete}>
+      <NodeField label="Operation">
         <select 
+          className="node-control"
           value={operation} 
           onChange={(e) => setOperation(e.target.value)}
-          style={{ width: '100%' }}
         >
           <option value="add">Add</option>
           <option value="subtract">Subtract</option>
@@ -44,7 +44,7 @@ export const MathNode = ({ id, data }) => {
           <option value="power">Power</option>
           <option value="modulo">Modulo</option>
         </select>
-      </label>
+      </NodeField>
     </BaseNode>
   );
 }

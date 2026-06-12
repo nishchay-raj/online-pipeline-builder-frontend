@@ -39,6 +39,7 @@ const selector = (state) => ({
   edges: state.edges,
   getNodeID: state.getNodeID,
   addNode: state.addNode,
+  deleteNode: state.deleteNode,
   onNodesChange: state.onNodesChange,
   onEdgesChange: state.onEdgesChange,
   onConnect: state.onConnect,
@@ -52,6 +53,7 @@ export const PipelineUI = () => {
       edges,
       getNodeID,
       addNode,
+      deleteNode,
       onNodesChange,
       onEdgesChange,
       onConnect
@@ -86,13 +88,16 @@ export const PipelineUI = () => {
               id: nodeID,
               type,
               position,
-              data: getInitNodeData(nodeID, type),
+              data: {
+                ...getInitNodeData(nodeID, type),
+                onDelete: () => deleteNode(nodeID),
+              },
             };
       
             addNode(newNode);
           }
         },
-        [reactFlowInstance]
+        [reactFlowInstance, getNodeID, addNode, deleteNode]
     );
 
     const onDragOver = useCallback((event) => {
@@ -102,8 +107,9 @@ export const PipelineUI = () => {
 
     return (
         <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} className="workflow-canvas">
             <ReactFlow
+          className="workflow-flow"
                 nodes={nodes}
                 edges={edges}
                 onNodesChange={onNodesChange}
@@ -116,10 +122,12 @@ export const PipelineUI = () => {
                 proOptions={proOptions}
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
+                fitView
+                defaultEdgeOptions={{ type: 'smoothstep', animated: true }}
             >
-                <Background color="#aaa" gap={gridSize} />
-                <Controls />
-                <MiniMap />
+                <Background color="rgba(94, 118, 153, 0.22)" gap={gridSize} size={1} />
+                <Controls className="workflow-flow__controls" />
+                <MiniMap className="workflow-flow__minimap" maskColor="rgba(255,255,255,0.65)" />
             </ReactFlow>
         </div>
         </>

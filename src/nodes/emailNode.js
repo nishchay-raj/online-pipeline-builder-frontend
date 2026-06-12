@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
+import { NodeField } from './NodeField';
 
 export const EmailNode = ({ id, data }) => {
   const [recipient, setRecipient] = useState(data?.recipient || 'user@example.com');
@@ -23,31 +24,25 @@ export const EmailNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode title="Email" handles={handles}>
-      <div>
-        <label style={{ display: 'block', fontSize: '11px', marginBottom: '4px' }}>
-          To:
-          <input 
-            type="text" 
-            value={recipient} 
-            onChange={(e) => setRecipient(e.target.value)}
-            placeholder="user@example.com"
-            style={{ fontSize: '11px', width: '100%' }}
-          />
-        </label>
-      </div>
-      <div>
-        <label style={{ display: 'block', fontSize: '11px' }}>
-          Subject:
-          <input 
-            type="text" 
-            value={subject} 
-            onChange={(e) => setSubject(e.target.value)}
-            placeholder="Subject"
-            style={{ fontSize: '11px', width: '100%' }}
-          />
-        </label>
-      </div>
+    <BaseNode title="Email" badge="MAIL" description="Prepares a message for delivery." handles={handles} variant="email" onDelete={data?.onDelete}>
+      <NodeField label="To">
+        <input 
+          className="node-control"
+          type="text" 
+          value={recipient} 
+          onChange={(e) => setRecipient(e.target.value)}
+          placeholder="user@example.com"
+        />
+      </NodeField>
+      <NodeField label="Subject">
+        <input 
+          className="node-control"
+          type="text" 
+          value={subject} 
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="Subject"
+        />
+      </NodeField>
     </BaseNode>
   );
 }

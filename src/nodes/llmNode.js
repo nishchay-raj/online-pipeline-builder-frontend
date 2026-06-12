@@ -25,8 +25,8 @@ export const LLMNode = ({ id, data }) => {
   ];
 
   return (
-    <BaseNode title="LLM" handles={handles}>
-      <div>This is a LLM.</div>
+    <BaseNode title="LLM" badge="AI" description="Routes prompts to a language model." handles={handles} variant="llm" onDelete={data?.onDelete}>
+      <div className="node-copy">This node represents a language model step.</div>
     </BaseNode>
   );
 }
