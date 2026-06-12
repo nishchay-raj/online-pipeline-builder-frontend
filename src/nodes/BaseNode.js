@@ -23,7 +23,7 @@ const headerStyle = {
   fontSize: '14px',
 };
 
-const contentStyle = {
+const contentContainerStyle = {
   flex: 1,
   fontSize: '12px',
   overflow: 'hidden',
@@ -57,7 +57,8 @@ export const BaseNode = ({
   title, 
   children, 
   handles = [], 
-  style = {} 
+  style = {},
+  contentStyle = {},
 }) => {
   return (
     <div style={{ ...baseNodeStyle, ...style }}>
@@ -76,7 +77,7 @@ export const BaseNode = ({
       {title && <div style={headerStyle}>{title}</div>}
 
       {/* Node-specific content */}
-      {children && <div style={contentStyle}>{children}</div>}
+      {children && <div style={{ ...contentContainerStyle, ...contentStyle }}>{children}</div>}
     </div>
   );
 };
