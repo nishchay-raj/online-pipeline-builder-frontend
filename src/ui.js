@@ -45,7 +45,7 @@ const selector = (state) => ({
   onConnect: state.onConnect,
 });
 
-export const PipelineUI = () => {
+export const PipelineUI = ({ isDarkMode = false }) => {
     const reactFlowWrapper = useRef(null);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const {
@@ -125,9 +125,9 @@ export const PipelineUI = () => {
                 fitView
                 defaultEdgeOptions={{ type: 'smoothstep', animated: true }}
             >
-                <Background color="rgba(94, 118, 153, 0.22)" gap={gridSize} size={1} />
+                <Background color={isDarkMode ? 'rgba(134, 163, 201, 0.22)' : 'rgba(94, 118, 153, 0.22)'} gap={gridSize} size={1} />
                 <Controls className="workflow-flow__controls" />
-                <MiniMap className="workflow-flow__minimap" maskColor="rgba(255,255,255,0.65)" />
+                <MiniMap className="workflow-flow__minimap" maskColor={isDarkMode ? 'rgba(11, 18, 32, 0.62)' : 'rgba(255,255,255,0.65)'} />
             </ReactFlow>
         </div>
         </>
