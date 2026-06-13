@@ -14,8 +14,6 @@ export const SubmitButton = () => {
             })),
         };
 
-        console.log(payload);
-
         try {
             const response = await fetch(
                 "http://localhost:8000/pipelines/parse",
@@ -36,7 +34,6 @@ export const SubmitButton = () => {
             alert(
             `Number of nodes: ${data.num_nodes}\nNumber of edges: ${data.num_edges}\nDirected Acyclic Graph: ${data.is_dag}`
             )
-            console.log(data);
         } catch (err) {
             console.error(err);
         }
