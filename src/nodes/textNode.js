@@ -5,6 +5,11 @@ import { Position } from 'reactflow';
 import { BaseNode } from './BaseNode';
 import { NodeField } from './NodeField';
 
+const MIN_NODE_WIDTH = 260;
+const MAX_NODE_WIDTH = 500;
+
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
   const textareaRef = useRef(null);
@@ -30,13 +35,34 @@ export const TextNode = ({ id, data }) => {
 
   useLayoutEffect(() => {
     const textarea = textareaRef.current;
+    const nodeElement = textarea?.closest('.workflow-node');
 
-    if (!textarea) {
+    if (!textarea || !nodeElement) {
       return;
+    }
+
+    const computedStyle = window.getComputedStyle(textarea);
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const textLines = currText.split('\n');
+
+    if (context) {
+      context.font = computedStyle.font || `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+
+      const widestLine = textLines.reduce((widest, line) => {
+        const measuredWidth = context.measureText(line || ' ').width;
+        return Math.max(widest, measuredWidth);
+      }, 0);
+
+      const nextWidth = clamp(Math.ceil(widestLine + 92), MIN_NODE_WIDTH, MAX_NODE_WIDTH);
+      nodeElement.style.width = `${nextWidth}px`;
     }
 
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
+
+    nodeElement.style.height = 'auto';
+    nodeElement.style.height = `${nodeElement.scrollHeight}px`;
   }, [currText]);
 
   const handleTextChange = (e) => {
@@ -73,10 +99,10 @@ export const TextNode = ({ id, data }) => {
       onDelete={data?.onDelete}
     >
       <NodeField label="Text" hint={`${variableNames.length} variable${variableNames.length === 1 ? '' : 's'} detected`}>
-        <textarea 
+        <textarea
           className="node-control node-control--textarea"
           ref={textareaRef}
-          value={currText} 
+          value={currText}
           onChange={handleTextChange}
           rows={1}
         />

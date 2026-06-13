@@ -100,16 +100,13 @@ button {
 }
 
 .app-shell__body {
-  display: grid;
-  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  align-items: start;
   flex: 1;
 }
 
 .toolbar-panel {
-  position: sticky;
-  top: 24px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -128,13 +125,15 @@ button {
 }
 
 .toolbar-palette {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
 .toolbar-node {
-  min-height: 88px;
+  flex: 1 1 140px;
+  min-width: 140px;
+  min-height: 72px;
   padding: 14px 12px;
   border-radius: 18px;
   display: flex;
@@ -464,7 +463,7 @@ button {
 }
 
 .node-control--textarea {
-  min-height: 96px;
+  min-height: 10px;
   resize: none;
   line-height: 1.55;
 }
