@@ -1,5 +1,4 @@
 // delayNode.js
-// Example node demonstrating delay/wait functionality
 
 import { useState } from 'react';
 import { Position } from 'reactflow';

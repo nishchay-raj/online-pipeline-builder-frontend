@@ -1,5 +1,4 @@
 // emailNode.js
-// Example node demonstrating email sending functionality
 
 import { useState } from 'react';
 import { Position } from 'reactflow';

@@ -1,34 +1,9 @@
 // BaseNode.js
 // Reusable base component for all React Flow nodes
-// Eliminates duplication across node implementations
 
 import React from 'react';
 import { Handle } from 'reactflow';
 
-/**
- * BaseNode - Reusable base component for React Flow nodes
- * 
- * @param {Object} props
- * @param {string} props.title - Node title displayed at the top
- * @param {React.ReactNode} props.children - Node-specific content
- * @param {Array<Object>} props.handles - Array of handle configurations
- *   Each handle object should have:
- *   - type: 'target' | 'source'
- *   - position: Position constant from reactflow
- *   - id: unique handle identifier
- *   - style: (optional) custom styles for the handle
- * @param {Object} props.style - (optional) custom style overrides
- * 
- * @example
- * <BaseNode
- *   title="Input Node"
- *   handles={[
- *     { type: 'source', position: Position.Right, id: 'output' }
- *   ]}
- * >
- *   <input type="text" value={text} onChange={handleChange} />
- * </BaseNode>
- */
 export const BaseNode = ({ 
   title, 
   badge,

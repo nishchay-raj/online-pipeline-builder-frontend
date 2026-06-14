@@ -1,5 +1,4 @@
 // databaseNode.js
-// Example node demonstrating database query functionality
 
 import { useState } from 'react';
 import { Position } from 'reactflow';

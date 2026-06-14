@@ -1,5 +1,4 @@
 // apiNode.js
-// Example node demonstrating API call functionality
 
 import { useState } from 'react';
 import { Position } from 'reactflow';

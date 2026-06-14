@@ -1,5 +1,4 @@
 // mathNode.js
-// Example node demonstrating mathematical operations
 
 import { useState } from 'react';
 import { Position } from 'reactflow';
