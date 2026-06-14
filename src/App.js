@@ -45,7 +45,7 @@ function App() {
       </button>
 
       <header className="app-shell__hero">
-        <div className="app-shell__eyebrow">React Flow workspace</div>
+        <div className="app-shell__eyebrow">Flow workspace</div>
         <h1 className="app-shell__title">Workflow builder</h1>
         <p className="app-shell__subtitle">
           Design, connect, and test automation steps in a polished SaaS-style canvas.
