@@ -74,12 +74,15 @@ Backend Validation
 ## Getting Started
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/nishchay-raj/online-pipeline-builder
 
 npm install
 
 npm start
 ```
+# Run Backend
+
+run ```uvicorn main:app --reload``` in the terminal
 
 ## Future Improvements
 
